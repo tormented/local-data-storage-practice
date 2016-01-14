@@ -1,0 +1,11 @@
+{
+  "name": "local-data-staroge-practice",
+  "version": "0.0.0",
+  "authors": [
+    "Vitaliy Melnik <vim@qapint.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "persistencejs": "~0.2.4"
+  }
+}

@@ -6,7 +6,7 @@ function transformObject (obj){
 
 var db = new Database();
 
-//db.createTable('Tasks', ['text TEXT', 'created_at DATETIME'], function () {
+//db.createTable('Tasks', ['text TEXT', 'created_at DATETIME', 'done BOOL'], function () {
 	//db.create('Tasks', ['test test', new Date()], db.onSuccess, db.onError);
 //}, db.onError);
 

@@ -1,6 +1,5 @@
 function Database(){
 	this.storage = openDatabase('todo', '1.0', 'my todo database', 2 * 1024 * 1024);
-
 }
 
 Database.prototype.createTable = function (name, fields, onSuccess, onError) {

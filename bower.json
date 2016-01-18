@@ -6,6 +6,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "persistencejs": "~0.2.4"
+    "persistencejs": "~0.2.4",
+    "lawnchair": "~0.6.4"
   }
 }

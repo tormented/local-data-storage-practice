@@ -47,27 +47,33 @@ Database.prototype.get = function (key, onSuccess, onError) {
 
 Database.prototype.update = function (key, data, onSuccess, onError) {
 	var transaction = this.db.transaction(["Tasks"], 'readwrite'),
-		objectStore = transaction.objectStore("Tasks");
+		objectStore = transaction.objectStore("Tasks"),
+		request = objectStore.get(key);
 
-	objectStore.get(key).onsuccess = function(event) {
-		var item = event.target.result;
-
-		item = data;
-		var request = objectStore.put(item);
-
-		request.onsuccess = function(e) {
-			console.log("Added Employee");
-		};
-
-		request.onerror = function(e) {
-			console.log(e.value);
-		};
-
-		objectStore.get(key).onsuccess = function(event) {
-			onSuccess(event.target);
-		};
+	request.onsuccess = function(event) {
+		data.id = key;
+		Object.keys(data).forEach(function (dataKey) {
+			request.result[dataKey] = data[dataKey];
+		});
+		objectStore.put(request.result);
+		onSuccess(event.target.result);
 	};
-	objectStore.get(key).onerror = function(event) {
+
+	request.onerror = function(event) {
+		onError(event.target);
+	};
+};
+
+Database.prototype.remove = function (key, onSuccess, onError) {
+	var transaction = this.db.transaction(["Tasks"], 'readwrite'),
+		objectStore = transaction.objectStore("Tasks"),
+		request = objectStore.delete(key);
+
+	request.onsuccess = function(event) {
+		onSuccess(event.target.result);
+	};
+
+	request.onerror = function(event) {
 		onError(event.target);
 	};
 };
